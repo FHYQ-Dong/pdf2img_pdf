@@ -47,4 +47,4 @@ if __name__ == "__main__":
     
     with open(workflow_info_file, 'w', encoding='utf-8') as f:
         f.write(json.dumps(workflow_info, ensure_ascii=False, indent=4) + '\n')
-    os.system(r'zip -r ../result/result.zip ../result/*')
+    # os.system(r'zip -r ../result/result.zip ../result/*')
