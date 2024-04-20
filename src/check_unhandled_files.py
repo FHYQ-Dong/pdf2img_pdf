@@ -4,9 +4,9 @@ import os
 class Checker():
     def __init__(self, upload_path: str, dest_path: str):
         if not os.path.isdir(upload_path):
-            raise FileNotFoundError(f"{upload_path} does not exist")
+            os.makedirs(upload_path)
         if not os.path.isdir(dest_path):
-            raise FileNotFoundError(f"{dest_path} does not exist")
+            os.makedirs(dest_path)
         self.upload_path = upload_path
         self.dest_path = dest_path
         self.handled_history = r'handled_files.txt'
