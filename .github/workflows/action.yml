@@ -41,26 +41,26 @@ jobs:
         . ./.venv/bin/activate
         python ./src/github_action_runner.py
 
-    - name: Get result files
-      id: get_result_files
+    - name: Get workflow info
       run: |
         {
-          echo 'result_files<<EOF'
-          ls ./result
-          echo 'EOF'
-        } >> "$GITHUB_OUTPUT"
-
-    - name: zip
-      run: |
-        cd ./result
-        zip -r result.zip ./*
+          echo 'workflow_info<<EOF'
+          cat ./src/workflow_info.json
+          echo EOF
+        } >> "$GITHUB_ENV"
 
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        files: ./result/result.zip
         token: ${{ secrets.GITHUB_TOKEN }}
-        tag_name: ${{ steps.get_result_files.outputs.result_files }}
-        release_name: ${{ steps.get_result_files.outputs.result_files }}
-        body: ${{ steps.get_result_files.outputs.result_files }}
+        tag_name: ${{ fromJson(env.workflow_info).tag }}
+        release_name: ${{ fromJson(env.workflow_info).title }}
+        body: ${{ fromJson(env.workflow_info).body }}
+        files: ${{ fromJson(env.workflow_info).zip-file }}
+      if: fromJson(env.workflow_info).publish == 'true'
+
+    - name: Git commit
+      uses: actions-js/push@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
     
