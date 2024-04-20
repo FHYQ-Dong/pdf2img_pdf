@@ -44,9 +44,9 @@ jobs:
     - name: Get workflow info
       run: |
         {
-          echo 'workflow_info<<EOF'
+          echo 'workflow_info<<!!!EOF'
           cat ./src/workflow_info.json
-          echo EOF
+          echo !!!EOF
         } >> "$GITHUB_ENV"
 
     - name: Release
