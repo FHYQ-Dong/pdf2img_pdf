@@ -52,7 +52,7 @@ jobs:
     - name: Zip
       run: |
         cd ./result
-        zip -r result.zip ./*
+        zip -r result.zip -i ./*
         echo ${{ fromJson(env.workflow_info).publish }}
 
     - name: Release
