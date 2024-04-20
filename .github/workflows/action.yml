@@ -14,9 +14,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    # - uses: fufuhu/get-commit-id@v1
-    #   id: get_commit_id
-
     - name: Set up Python 3.11
       uses: actions/setup-python@v3
       with:
@@ -63,7 +60,7 @@ jobs:
       with:
         files: ./result/result.zip
         token: ${{ secrets.GITHUB_TOKEN }}
-        # tag_name: ${{ steps.get_commit_id.outputs.commit_id }}
-        # release_name: ${{ steps.get_commit_id.outputs.commit_id }}
-        release_notes: ${{ steps.get_result_files.outputs.result_files }}
+        tag_name: ${{ steps.get_result_files.outputs.result_files }}
+        release_name: ${{ steps.get_result_files.outputs.result_files }}
+        body: ${{ steps.get_result_files.outputs.result_files }}
     
