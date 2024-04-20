@@ -57,7 +57,7 @@ jobs:
         release_name: ${{ fromJson(env.workflow_info).title }}
         body: ${{ fromJson(env.workflow_info).body }}
         files: ${{ fromJson(env.workflow_info).zip-file }}
-      if: fromJson(env.workflow_info).publish == 'true'
+      if: fromJson(env.workflow_info).publish
 
     - name: Git commit
       uses: actions-js/push@master
