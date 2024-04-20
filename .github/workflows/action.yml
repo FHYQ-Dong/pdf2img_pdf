@@ -49,6 +49,12 @@ jobs:
           echo EOF
         } >> "$GITHUB_ENV"
 
+    - name: Zip
+      run: |
+        cd ./result
+        zip -r result.zip ./*
+        echo ${{ fromJson(env.workflow_info).publish }}
+
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
